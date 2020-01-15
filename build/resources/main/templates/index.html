@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"> <head>
+    <title>Atelier contact - Marine Surply</title>
+    <meta http-equiv="Content-Type" content="text/html; char- set=UTF-8" />
+</head>
+<body>
+
+<a href="/index">Index</a>
+<a href="AddContact">Ajouter un contact</a>
+
+<ul th:each="e : ${contacts}">
+    <li th:text="${e.firstName + ' ' +  e.lastName}"/><a th:href="'ModifContact?id='+${e.id}">Modifier</a><a th:href=" 'SupprimeContact?id='+${e.id}">supprimer</a>
+</ul>
+
+
+</body>
+</html>

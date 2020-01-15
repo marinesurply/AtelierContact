@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"> <head>
+    <title>Ajouter un contact - Atelier contact - Marine Surply</title>
+    <meta http-equiv="Content-Type" content="text/html; char- set=UTF-8" />
+
+    <script type='text/javascript'>
+        function addField(){
+            var form = document.getElementById("myTable");
+            var tr=document.createElement("tr");
+            var td=document.createElement("td");
+            var input=document.createElement("input");
+            input.setAttribute("type", "text");
+            input.setAttribute("name", "addresses");
+            tr.appendChild(td);
+            td.appendChild(input);
+            form.appendChild(tr);
+        }
+    </script>
+</head>
+<body>
+
+<a href="/index">Index</a>
+<a href="AddContact">Ajouter un contact</a>
+
+
+<form action="#" th:action="@{/ValideForm}" th:object="${contactForm}" method="post">
+    <table id="myTable">
+        <input type="hidden" th:field="*{id}" />
+        <tr>
+            <td>Nom :</td>
+            <td><input type="text" th:field="*{firstName}" /></td>
+            <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">firstName Error</td>
+        </tr>
+        <tr>
+            <td>Prénom :</td>
+            <td><input type="text" th:field="*{lastName}" /></td>
+            <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">lastName Error</td>
+        </tr>
+        <tr>
+            <td>Addresses:</td>
+        </tr>
+        <p id='addresses' th:each="e,stat : ${contactForm.addressList}">
+            <tr>
+                <td><input type="text" name='addresses' th:value="${e}"/></td>
+
+            </tr>
+        </p>
+
+        <tr>
+
+        </tr>
+    </table>
+    <button type="button" onclick="addField()">Ajouter une addresse</button>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
